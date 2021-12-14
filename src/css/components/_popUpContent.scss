@@ -1,0 +1,47 @@
+.samsung__care__details {
+  a {
+    text-decoration: underline;
+    color: #006bea;
+  }
+  ul {
+    padding-left: 20px;
+  }
+}
+
+.modal__header {
+  padding-bottom: 0px;
+}
+.modal__title {
+  font-size: 18px;
+}
+.modal__terms {
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+
+.modal__buttons--inline {
+  flex-direction: row-reverse;
+  width: 50%;
+  .modal__buttons--inline button:first-child {
+    margin-inline-end: 0px;
+  }
+  .modal__buttons--inline button {
+    margin: 0px 10px 0px 0px;
+  }
+}
+
+.pill-btn--white {
+  color: #1f78ec;
+  background: white;
+  border: 1px solid #fff;
+  text-decoration: underline;
+}
+.pill-btn--black {
+  background: #006bea;
+}
+.pill-btn--black:hover {
+  background: #006bea;
+}
+.pill-btn--white:hover {
+  color: #000;
+}

@@ -1,0 +1,24 @@
+// ==========================================================================
+// Imports
+// ==========================================================================
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'components/popUpContent';
+
+// ==========================================================================
+// Basic definitions
+// ==========================================================================
+.warning__policy {
+  color: red;
+  font-weight: bold;
+}
+.learn__more__popfeature {
+  color: #006ff2;
+  margin-top: 5px;
+  font-family: SamsungOne700, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  display: inline;
+  cursor: pointer;
+}
