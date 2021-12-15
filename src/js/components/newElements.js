@@ -4,10 +4,11 @@ export default class NewElements {
   const popUpContent = new PopUpContent();
   document.querySelector('.opti__div').style.display = 'block';
   popUpContent.addConent();
+  (window.innerWidth <= 920) ? popUpContent.iconBtnClick() : '';
   const samsungCare = document.querySelectorAll('.opti__div');
 			samsungCare.forEach(samsungCare => {
-    if (samsungCare.previousSibling.innerText === 'Add Samsung Care+') {
-
+    if (samsungCare.previousSibling.textContent === 'Add Samsung Care+') {
+      (samsungCare.previousElementSibling)
      samsungCare.previousSibling.style.display = 'none';
      const learnmoreBtn = document.querySelector('.learn__more__popfeature');
 

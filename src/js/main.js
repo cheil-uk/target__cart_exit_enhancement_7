@@ -40,13 +40,22 @@ cheillondon.targetBoilerplate = (function () {
 			setTimeout(function () {
 				if (window.$) {
 					console.log('doEverythingTimeout - jQuery loaded');
-					const popUpContent = new PopUpContent();
-					const addElements = new AddElements();
-					main.appendNewStyle();
-					addElements.elementsAdded();
-					popUpContent.addConent();
-					main.elementObservation();
-					main.insureText();
+					const cartSkus = document.querySelectorAll('.cart-item__sku');
+					cartSkus.forEach((cartSku) => {
+						if(cartSku.innerText.includes('SM-G99') || cartSku.innerText.includes('SM-F')) {
+							const popUpContent = new PopUpContent();
+							const addElements = new AddElements();
+							main.appendNewStyle();
+							addElements.elementsAdded();
+							popUpContent.addConent();
+							main.elementObservation();
+							main.insureText();
+							popUpContent.iconBtnClick();
+						} else {
+							console.log('not in range')
+						}
+					})
+
 				} else {
 					console.log('no jquery')
 					_self.doEverythingTimeout();
@@ -87,12 +96,13 @@ cheillondon.targetBoilerplate = (function () {
 		removeStuff: function () {
 			const description = document.querySelectorAll('.opti__div');
 			description.forEach((desc) => {
+				// console.log(desc.innerText.includes('insurance'))
 				if (desc.innerText.includes('insurance')) {
 					desc.previousElementSibling.style.display = 'block';
 					desc.previousSibling.style.color = '#000000'
 					desc.style.display = 'none'
 				}
-				if (desc.previousElementSibling.innerText === 'Add Samsung Care+') {
+				if (desc.previousElementSibling.textContent === 'Add Samsung Care+') {
 					// console.log('got in here as well')
 					const addingNewElements = new NewElements();
 					addingNewElements.addingNewElements();
@@ -101,12 +111,14 @@ cheillondon.targetBoilerplate = (function () {
 		},
 
 		elementObservation: function () {
-				const eleToObserve = document.querySelector('.service-item');
+				const eleToObserve = document.querySelector('.service-item')
+				const eleNumTwoObserve = document.querySelector("div:nth-child(2) > div > cx-cart-item > div > div.cart-item__services > app-cart-added-services > div:nth-child(1)")
 					const observer = new MutationObserver(() => {
-						// console.log('trigger')
+						console.log('trigger')
 						this.removeStuff();
 					});
-					observer.observe(eleToObserve, {subtree: true, childList: true})
+					observer.observe(eleToObserve, {subtree: true, childList: true});
+					// observer.observe(eleNumTwoObserve, {subtree: true, childList: true})
 		},
 
 		insureText: function () {
