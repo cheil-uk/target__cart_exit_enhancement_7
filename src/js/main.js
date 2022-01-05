@@ -96,11 +96,11 @@ cheillondon.targetBoilerplate = (function () {
 		removeStuff: function () {
 			const description = document.querySelectorAll('.opti__div');
 			description.forEach((desc) => {
-				// console.log(desc.innerText.includes('insurance'))
+
 				if (desc.innerText.includes('insurance')) {
 					desc.previousElementSibling.style.display = 'block';
-					desc.previousSibling.style.color = '#000000'
-					desc.style.display = 'none'
+					desc.previousSibling.style.color = '#000000';
+					desc.style.display = 'none';
 				}
 				if (desc.previousElementSibling.textContent === 'Add Samsung Care+') {
 					// console.log('got in here as well')
@@ -112,13 +112,13 @@ cheillondon.targetBoilerplate = (function () {
 
 		elementObservation: function () {
 				const eleToObserve = document.querySelector('.service-item')
-				const eleNumTwoObserve = document.querySelector("div:nth-child(2) > div > cx-cart-item > div > div.cart-item__services > app-cart-added-services > div:nth-child(1)")
 					const observer = new MutationObserver(() => {
 						console.log('trigger')
 						this.removeStuff();
 					});
 					observer.observe(eleToObserve, {subtree: true, childList: true});
-					// observer.observe(eleNumTwoObserve, {subtree: true, childList: true})
+
+
 		},
 
 		insureText: function () {

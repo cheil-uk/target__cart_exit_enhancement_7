@@ -10,17 +10,23 @@ export default class AddElements {
 					cartOption.nextElementSibling.style.display = 'none';
      cartOption.nextElementSibling.style.color = '#ffffff';
 					const htmlContext = `<div class="ng-star-inserted service-item__description opti__div">
-					${(sku.includes('SM-G99') ? `<p class="warning__policy">Try Samsung Care+ free for 30 days (does not renew)*</p>`: '')}
+					${(sku.includes('SM-G99') ? `<p class="warning__policy">Try Samsung Care+ free for 30 days (does not renew)</p>`: '')}
 						<p>Up to 24 months of worldwide accidental damage insurance for complete peace of mind.</p>
 						<p class="learn__more__popfeature">Learn more</p>
 					</div>`
 					cartOption.nextElementSibling.insertAdjacentHTML('afterend',htmlContext)
 					cartOption.parentElement.nextElementSibling.children[0].children[0].children[1].innerText = 'Add Insurance';
 
-					const learnmoreBtn = document.querySelector('.learn__more__popfeature')
-					learnmoreBtn.onclick = () => {
-						insuranceBtn.click();
-					}
+					// const learnmoreBtn = document.querySelector('.learn__more__popfeature')
+					// learnmoreBtn.onclick = () => {
+					// 	insuranceBtn.click();
+					// }
+
+					document.querySelectorAll('.learn__more__popfeature').forEach((btn) => {
+							btn.onclick = () => {
+							insuranceBtn.click();
+						}
+					})
 				}
 			})
 

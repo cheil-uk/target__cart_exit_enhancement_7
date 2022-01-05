@@ -1,9 +1,10 @@
 export default class PopUpContent {
   addConent() {
     const cartOptions = document.querySelectorAll('.service-item__name');
-
+    // const insuranceBtn = cartOptions[0].parentElement.nextElementSibling.children[0].children[0].children[1];
     cartOptions.forEach(cartOption => {
-      const insuranceBtn = cartOption.parentElement.nextElementSibling.children[0].children[0].children[1];
+      // console.log(insuranceBtn)
+      const insuranceBtn = (cartOption.parentElement.nextElementSibling.children[0].children[0].children[1].innerText === 'Add Insurance')? cartOption.parentElement.nextElementSibling.children[0].children[0].children[1] : cartOption.parentElement.nextElementSibling.children[0].children[0].children[0]
       const sku = cartOption.parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[4].innerText;
       insuranceBtn.onclick = () => {
         console.log('pop n click')
@@ -43,11 +44,14 @@ export default class PopUpContent {
             labels.forEach((label) => {
               const name = label.firstChild.innerText;
               if (name === '1 year coverage') {
-                label.lastElementChild.innerText = '12-month policy'
+                label.lastElementChild.innerText = '12-month policy';
               } else if (name === '2 year coverage') {
-                label.lastElementChild.innerText = '24-month policy'
+                label.lastElementChild.innerText = '24-month policy';
               } else if (name.includes('Free')) {
-                label.lastElementChild.innerText = 'One month policy'
+                label.innerHTML = '<div class="option-box__name">One Month Free (Does not renew)</div><div class="option-box__code">One month policy</div>'
+                label.lastElementChild.innerText = 'One month policy';
+
+
               }
             })
 
@@ -126,6 +130,7 @@ export default class PopUpContent {
               } else if (name === '2 year coverage') {
                 label.lastElementChild.innerText = '24-month policy'
               } else if (name.includes('Free')) {
+                label.innerHTML = '<div class="option-box__name">One Month Free (Does not renew)</div><div class="option-box__code">One month policy</div>'
                 label.lastElementChild.innerText = 'One month policy'
               }
             })
