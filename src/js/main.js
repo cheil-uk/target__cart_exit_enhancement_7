@@ -103,7 +103,7 @@ cheillondon.targetBoilerplate = (function () {
 					desc.style.display = 'none';
 				}
 				if (desc.previousElementSibling.textContent === 'Add Samsung Care+') {
-					// console.log('got in here as well')
+					console.log('got in here as well')
 					const addingNewElements = new NewElements();
 					addingNewElements.addingNewElements();
 				}

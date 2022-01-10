@@ -10,7 +10,9 @@ export default class AddElements {
 					cartOption.nextElementSibling.style.display = 'none';
      cartOption.nextElementSibling.style.color = '#ffffff';
 					const htmlContext = `<div class="ng-star-inserted service-item__description opti__div">
-					${(sku.includes('SM-G99') ? `<p class="warning__policy">Try Samsung Care+ free for 30 days (does not renew)</p>`: '')}
+					${(sku.includes('SM-G990') ? `<p class="warning__policy"></p>`
+					: sku.includes('SM-G99') ? '<p class="warning__policy">Try Samsung Care+ free for 30 days (does not renew)</p>'
+					: '')}
 						<p>Up to 24 months of worldwide accidental damage insurance for complete peace of mind.</p>
 						<p class="learn__more__popfeature">Learn more</p>
 					</div>`

@@ -4,7 +4,8 @@ export default class PopUpContent {
     // const insuranceBtn = cartOptions[0].parentElement.nextElementSibling.children[0].children[0].children[1];
     cartOptions.forEach(cartOption => {
       // console.log(insuranceBtn)
-      const insuranceBtn = (cartOption.parentElement.nextElementSibling.children[0].children[0].children[1].innerText === 'Add Insurance')? cartOption.parentElement.nextElementSibling.children[0].children[0].children[1] : cartOption.parentElement.nextElementSibling.children[0].children[0].children[0]
+      const insuranceBtn = (cartOption.parentElement.nextElementSibling.children[0].children[0].children[1].innerText === 'Add Insurance')? cartOption.parentElement.nextElementSibling.children[0].children[0].children[1] : cartOption.parentElement.nextElementSibling.children[0].children[0].children[1]
+
       const sku = cartOption.parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[4].innerText;
       insuranceBtn.onclick = () => {
         console.log('pop n click')
@@ -25,7 +26,10 @@ export default class PopUpContent {
                   <li>Up to four claims within 24 months, or two within 12 months</li>
                   <li><a href="https://www.samsung.com/uk/offer/samsung-care-plus/">See all benefits here.</a> Key details of your policy can be found in the <a href="https://images.samsung.com/is/content/samsung/p5/uk/samsung-mobile-care-ipid.pdf">Insurance Proudct Infomation Document(IPID)</a></li>
                 </ul>
-                <div class="samsung__care__details__30days" style="${(sku.includes('SM-G99')) ? "display: block" : "display: none"}">
+                <div class="samsung__care__details__30days" style="${(
+                  sku.includes('SM-G990') ? "display: none"
+                : sku.includes('SM-G99') ? "display: block"
+                : "display: none")}">
                   <h2 class="modal__title">Try Samsung Care+ free for 30 days</h2>
                   <p class="hubble-product__options-content-text">Does not renew automatically. Cover terminates after 30 days unless renewed at samsungcareplus.com.
                   Service fee per claim still applies. View the Insurance Product Information Pack(IPID) for full policy details.
@@ -107,7 +111,10 @@ export default class PopUpContent {
                   <li>Up to four claims within 24 months, or two within 12 months</li>
                   <li><a href="https://www.samsung.com/uk/offer/samsung-care-plus/">See all benefits here.</a> Key details of your policy can be found in the <a href="https://images.samsung.com/is/content/samsung/p5/uk/samsung-mobile-care-ipid.pdf">Insurance Proudct Infomation Document(IPID)</a></li>
                 </ul>
-                <div class="samsung__care__details__30days" style="${(sku.includes('SM-G99')) ? "display: block" : "display: none"}">
+                <div class="samsung__care__details__30days" style="${(
+                  sku.includes('SM-G990') ? "display: none"
+                : sku.includes('SM-G99') ? "display: block"
+                : "display: none")}">
                   <h2 class="modal__title">Try Samsung Care+ free for 30 days</h2>
                   <p class="hubble-product__options-content-text">Does not renew automatically. Cover terminates after 30 days unless renewed at samsungcareplus.com.
                   Service fee per claim still applies. View the Insurance Product Information Pack(IPID) for full policy details.
