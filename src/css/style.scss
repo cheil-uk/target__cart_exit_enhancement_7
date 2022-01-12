@@ -8,17 +8,18 @@
 // ==========================================================================
 // Basic definitions
 // ==========================================================================
-.warning__policy {
-  color: red;
-  font-weight: bold;
-}
-.learn__more__popfeature {
+.tradein__learnmore {
   color: #006ff2;
   margin-top: 5px;
+  text-decoration: underline;
+  cursor: pointer;
   font-family: SamsungOne700, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 700;
-  text-decoration: underline;
-  display: inline;
-  cursor: pointer;
+}
+
+.warning__policy {
+  color: red;
+  font-weight: bold;
+  font-family: SamsungOne700, Arial, Helvetica, sans-serif;
 }
