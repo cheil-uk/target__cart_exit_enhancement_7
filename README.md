@@ -13,4 +13,9 @@ Simple Gulp, Sass and JS boiletplate
 ## Test
 
 Use additional QA parameters of Adobe Target (see above)
-Such as: https://www.samsung.com/ie/smartphones/all-smartphones/?galaxy-s+galaxy-z&at_preview_token=mCC5Cr9vqdC4qmcTlXfiQXXoF8PgTBKc0I00Y3g6O2U%3D&at_preview_index=1_1&at_preview_listed_activities_only=true
+Such as: 
+Control: https://shop.samsung.com/uk/cart?at_preview_token=yAyXIbO9cEbFrJsX5MUh5osfdKGAJyg5DsJ3XxNj67A&at_preview_index=1_1&at_preview_listed_activities_only=true
+Test: https://shop.samsung.com/uk/cart?at_preview_token=yAyXIbO9cEbFrJsX5MUh5osfdKGAJyg5DsJ3XxNj67A&at_preview_index=1_2&at_preview_listed_activities_only=true
+
+
+Target Activity: Local:AB:SEUK:220217:COMP:DA:TV:CART:Cart exit enhancement

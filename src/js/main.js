@@ -40,10 +40,13 @@ cheillondon.targetBoilerplate = (function () {
 				if (window.$) {
 					console.log('doEverythingTimeout - jQuery loaded');
 					main.appendNewStyle();
-					main.tweakElements();
-					main.addElements();
+					main.addRemoveElements();
+
+					
+					/*main.tweakElements();
+					
 					main.insureButtons();
-					main.freeInsurance();
+					main.freeInsurance();*/
 
 				} else {
 					console.log('no jquery')
@@ -82,154 +85,169 @@ cheillondon.targetBoilerplate = (function () {
 
 		},
 
-		tweakElements: function () {
-
-			const testedDevices = ["S21", "S21+", "S21 Ultra", "Note 20", "Note20", "A72", "A52 5G", "Tab S7", "Z Flip3 5G"];
-			var priceFormatter = new Intl.NumberFormat("en-UK", { style: "currency", currency: "GBP" });
-
-			 var termsAsterisks = 0;
-    var terms = [];
-
-    $(".cart-item").each(function (index, element) {
-        if(testedDevices.filter((device) => (element.querySelector(".cart-item__name").innerText.includes(device))) && ($(element).find(".service-item:contains(Insurance)").length > 0)) {//If device name matches and has trade in text
-            //for whatever reason, do another loop to get the matched device keyword e.g. "S21+", but that makes the order of the testedDevices important
-            //for instance, if S21 was after S21 Ultra, S21 Ultra would be counted as S21 (because of the for loop below)
-            var matchedDevice;
-            testedDevices.forEach(function (device) {
-                if(element.querySelector(".cart-item__name").innerText.includes(device)) matchedDevice = device;
-            });
-
-            var $tradeInElement = $(element).find(".service-item:contains(Insurance)"),
-                $details = $tradeInElement.find(".service-item__details"),
-                $learnMoreButton = $("<p class='tradein__learnmore'>Learn More</p>");
-
-														let firstLoadDetails = new Array ($details[0].children);
-
-
-            if (!$tradeInElement.find(".action-text.action-text--mobile.ng-star-inserted").text().includes("-£")) { //avoid repeats
-                termsAsterisks += 1;
-                $details.children()[0].innerText = "Add Samsung Care+";
-                var copy;
-                var legal;
-                switch (matchedDevice) {
-                    case "S21+":
-                    case "S21 Ultra":
-                        (copy = "Up to 24 months of worldwide accidental damage insurance for complete peace of mind." );
-                        break;
-                    case "S21":
-                        (copy = "Up to 24 months of worldwide accidental damage insurance for complete peace of mind.");
-                        break;
-                    case "Note 20":
-                    case "Note20":
-                        (copy = "Up to 24 months of worldwide accidental damage insurance for complete peace of mind.");
-                        break;
-                    case "A72":
-                    case "A52 5G":
-                        (copy = "Up to 24 months of worldwide accidental damage insurance for complete peace of mind.");
-                        break;
-                    case "Tab S7":
-                        (copy = "Up to 24 months of worldwide accidental damage insurance for complete peace of mind.");
-                        break;
-                    case "Z Flip3 5G":
-                        (copy = "Up to 24 months of worldwide accidental damage insurance for complete peace of mind.");
-                        break;
-                    default:
-                        (copy = "Trade In product"), (legal = ""), console.error("Product outside expected product range.");
-                }
-																(element.querySelector('.service-item__insurance-copy') === null ) ? $details.children().children().hide()  : $details.children().children().show();
-																$details.children()[1].insertAdjacentHTML('afterend', `<div class="service-item__insurance-copy"><p>${copy}</p></div>`)
-                // terms.push(legal);
-                $details.append($learnMoreButton);
-
-																const popUpContent = new PopUpContent();
-                $learnMoreButton.on("click", function () {
-                    $tradeInElement.find(".action-button.ng-star-inserted").click();
-																				popUpContent.addContent();
-                });
-
-                $tradeInElement.find(".action-text.action-text--blue").text("Add Insurance");
-
-                var priceElement = $(element).find(".price__current")[0];
-                var Observer = window.MutationObserver || window.WebKitMutationObserver;
-
-                new Observer(function (n) {
-                    var modelPrice = element.getAttribute("data-modelprice");
-                    var price = Number(priceElement.innerText.replace(/[^0-9.-]+/g, ""));
-                    modelPrice == price || isNaN(price)
-                        ? ($learnMoreButton.show(), $(element).find(".price__current > div").length > 0 && $(element).find(".price__current > div").remove(), $tradeInElement.find(".action-text.action-text--blue").text("Add Insurance"))
-                        : ($learnMoreButton.hide(),
-                            $(element)
-                                .find(".price__current")
-                                .append('<div class="tradein__oldprice">' + priceFormatter.format(modelPrice) + "</div>"));
-                }).observe(priceElement, { childList: !1, characterData: !0, attributes: !0, subtree: !0 });
-
-                new Observer(function () {
-                    $tradeInElement.find(".service-item__applied-message.ng-star-inserted:contains(been successfully applied)").text($tradeInElement);
-                }).observe($tradeInElement[0], { childList: !0, characterData: !0, attributes: !0, subtree: !0 });
-
-																new Observer(function () {
-																	console.log('observations here')
-																	$details.children()[1].nextSibling.style.display = 'none';
-																	$learnMoreButton.hide();
-																	if ($details.children()[1].innerText.includes('Add Samsung Care+')) {
-																		console.log('we have now entered here')
-																		$details.children()[1].nextSibling.style.display = 'block';
-																		$learnMoreButton.show();
-																		$details.children()[1].childNodes[0].style.color = 'white';
-																		$details.children()[1].childNodes[0].style.height = '0px';
-																		$tradeInElement.find(".action-text.action-text--blue").text("Add Insurance");
-																	}
-																}).observe($details.children()[1], {attributes: true, childList: true, subtree: true})
-
-            }
-
-        }
-
-    })
-
-   main.processTermsFooter(terms);
-
-
-		},
-
-		insureButtons: function () {
-
-			const allbtns = document.querySelectorAll('.action-text');
-			const popUpContent = new PopUpContent();
-									allbtns.forEach((insureBtn) => {
-									if (insureBtn.innerText.includes('Add Insurance')){
-												insureBtn.onclick = () => {
-													popUpContent.addContent();
-												}
-										}
-									})
-
-		},
-
-		freeInsurance: function () {
-			const cartNames = document.querySelectorAll('.cart-item__name');
-
-			cartNames.forEach((cartName) => {
-				if (cartName.innerText.includes('Galaxy S21 5G')) {
-					const cartservicesContainer = cartName.parentElement.parentElement.parentElement.children[6]
-					const insuranceCopyContainer = cartservicesContainer.querySelector('.service-item__insurance-copy')
-					const paragraph = `<p class="warning__policy">Try Samsung Care+ free for 30 days (does not renew)</p>`
-					insuranceCopyContainer.insertAdjacentHTML('afterbegin', paragraph)
-				}
-			})
-
-		},
-
-
-
+		
 		// ==========================================================================
 		// When page is already loaded we need to add the new elements
 		// ==========================================================================
-		addElements: function () {
+		addRemoveElements: function () {
 
-			console.log('XXX - addElements');
+			console.log('XXX - addRemoveElements');
+			
+
+			const eligibleSkus = [
+
+				"NP345XLA-KB6UK",
+				"NP755XDA-KB3UK",
+				"NP750XDA-KDAUK",
+				"NP935XDB-KC3UK",
+				"NP345XLA-KB5UK",
+				"NP750XDA-KC3UK",
+				"NP750XDA-KDBUK",
+				"NP930QDB-KE3UK",
+				"NP950XDB-KE2UK",
+				"NP935QDB-KA2UK",
+
+				"UE65TU7020KXXU",
+				"QE43LS03AAUXXU",
+				"QE65QN95AATXXU",
+				"UE32T5300CKXXU",
+				"QE32LS03TCUXXU",
+				"UE50TU7020KXXU",
+				"UE43AU8000KXXU",
+				"QE55LS03AAUXXU",
+				"QE55QN95AATXXU",
+				"QE50QN90AATXXU",
+
+				"WW90T684DLH/S1",
+				"WW80TA046AX/EU",
+				"WW90TA046AE/EU",
+				"WW90TA046AX/EU",
+				"WW90T4540AE/EU",
+				"WW90T534DAN/S1",
+				"DV90T6240LN/S1",
+				"DV90T5240AW/S1",
+				"DV90T5240AN/S1",
+				"DV90T6240LH/S1",
+
+				"RS54N3103SA/EU",
+				"BRB26705DWW/EU",
+				"RS67A8811S9/EU",
+				"BRB26600FWW/EU",
+				"RS67A8810S9/EU",
+				"RS67A8810B1/EU",
+				"RB38T633ESA/EU",
+				"RB34T602EBN/EU",
+				"RB34T632EBN/EU",
+				"RF23R62E3SR/EU"
+			];
+
+			/** Take the product price Total amount from Cart **/
+			let productPrice = parseInt($('.summary-total__amount').text().trim().replace(/\u00A3/g, ''));
 
 
+			let financeContent = '';
+
+			/** Showing different finance details for the product price in between 150 to 250 and  250 and above **/
+			switch (true) {
+                case productPrice >= 150 && productPrice <= 250:
+                	financeContent = `
+                		<div class="title">Discover a new way to pay with Samsung Finance</div>
+						<div class="txt">Spread the cost of your order over 12 months at 0% APR representative.*</div>
+                	`;
+                	break;
+                default:
+                	financeContent = `
+                		<div class="title">Flexible ways to pay with Samsung Finance</div>
+						<div class="txt">Spread the cost of your order over 12 to 36 months at 0% APR representative.*</div>
+                	`;
+            }
+
+
+
+			const deliveryContent= `
+				<div class="delivery-info-wrapp">
+					<div class="delivery-info">
+						<div class="title">Your order qualifies for:</div>
+						<div class="info-list">
+							<div class="txt">Next day delivery (<a href="#" class="delivey-popup-link" data-omni-type="microsite" data-omni="simple buying tool:your order qualifies for:more info" data-an-tr="order-qualifies-info" data-an-la="your order qualifies for:more info">More info</a>) </div>
+							<div class="price">FREE</div>     
+						</div>
+						<div class="info-list">
+							<div class="txt">Scheduled day delivery</div>
+							<div class="price">FREE</div>     
+						</div>
+						<div class="info-list">
+							<div class="txt">Same day delivery</div>
+							<div class="price">See checkout</div>     
+						</div>
+						<div class="info-list">
+							<div class="txt">Timed delivery</div>
+							<div class="price">See checkout</div>     
+						</div>
+						<div class="info-list">
+							<div class="txt">21-day returns (<a href="#" class="delivey-popup-link" data-omni-type="microsite" data-omni="simple buying tool:your order qualifies for:more info" data-an-tr="order-qualifies-info" data-an-la="your order qualifies for:more info">More info</a>)</div>
+							<div class="price">FREE</div>     
+						</div>
+						<div class="info-list">
+							<div class="txt">Further delivery, installation, and recycling options are available when you check out.</div>
+						</div>  
+					</div>
+
+					<div class="finance-info">
+						${financeContent}
+					</div>
+				</div>
+			`;
+
+			// Remove already added delivery elements first
+	        main.removeDeliveryElements();
+
+
+			let noOfEligibleSkus = 0;
+
+			$(".cart-item").each(function (index, element) {
+
+				if (eligibleSkus.filter((sku) => (element.querySelector(".cart-item__sku").innerText.includes(sku))).length) {
+					//If sku matches the eligible Sku list
+            		
+					noOfEligibleSkus = noOfEligibleSkus+1; 
+            		return false; // to break the loop
+
+            	}
+
+
+			});
+
+
+			if (noOfEligibleSkus > 0) {
+					
+				/** Ensure that no Delivery details div already added to the cart **/
+				if ($('#DeliveryDetails').length == 0) {
+					let deliveryDetails = $("<p id='DeliveryDetails'></p>");
+					document.body.contains(deliveryDetails[0]) || $( deliveryDetails ).insertAfter( "cx-cart-details" ), deliveryContent && deliveryDetails.html(deliveryContent);
+					main.setEvents('deliveryPopup'); // More info link clicked to view delivery popup
+					main.setEvents('itemRemovedFromCart'); // If a Item removed from cart
+					main.processTermsFooter();
+				}
+				
+			}
+
+			/*else {
+				 *Remove deleivery details when there is no eligible products in the cart *
+				$('#DeliveryDetails').remove();
+				$('#TradeInConditions').remove();
+
+			}*/
+
+			
+
+		},
+
+
+		removeDeliveryElements: function() {
+
+			$('#DeliveryDetails').remove();
+			$('#TradeInConditions').remove();
 
 		},
 
@@ -242,11 +260,27 @@ cheillondon.targetBoilerplate = (function () {
 			console.log('XXX - setEvents: ' + elm);
 
 			switch (elm) {
-				case 'modal':
-					//code to open modal;
+				case 'deliveryPopup':
+					//code to open delivery popup;
+					$('.delivey-popup-link').on('click', function(e){
+						e.preventDefault();
+						const popUpContent = new PopUpContent();
+						popUpContent.addContent();
+					});
 					break;
-				case 'financePopup':
-				//code to open something else;
+
+				case 'itemRemovedFromCart':
+
+					/*$('.cart-item__remove--btn').on('click', function(){
+						main.addRemoveElements();
+					});*/
+
+					/** If the cart total order value changes and addRemoveElements method is called to update delivery details**/
+					$('.summary-total__amount').on('DOMSubtreeModified', function(){
+					  	main.addRemoveElements();
+					});
+					break;
+
 				default:
 					break;
 			}
@@ -263,11 +297,18 @@ cheillondon.targetBoilerplate = (function () {
 			}, 100);
 		},
 
-		processTermsFooter: function (n) {
-				let Terms = $("<p id='TradeInConditions'></p>");
-							document.body.contains(Terms[0]) || $(".TermsConditionsSlotContent").append(Terms), n && Terms.html(n.join("<br/>"));
-			},
-			Terms: $("<p id='TradeInConditions'></p>"),
+		processTermsFooter: function () {
+			let termsContent = `
+				<div class="title">Terms and conditions</div>
+    			<p class="txt">*All credit is subject to status and only available to UK residents over 18, with a UK Bank account and valid driver’s license, passport, or identity card. Credit duration is variable, and you could be offered credit at a higher rate than the representative APR set out above based on your personal financial circumstances and what you tell us. For smaller baskets of between £150 and £250 a minimum upfront payment of 20% is required and 12 months fixed monthly payments. For loans above £250, a 10% deposit is required and up to 36 months of fixed monthly payments. By accepting our credit you consent to a credit check being completed which will appear on your credit file.</p>
+    			<div class="title">Samsung Finance</div>
+    			<p class="txt">Samsung Electronics (UK) Limited (Registered no: 03086621), registered at Samsung House, 2000 Hillswood Drive, Chertsey, Surrey KT16 0RS, United Kingdom, acts as a credit broker and not as a lender. Samsung is authorised and regulated by the Financial Conduct Authority (FRN 727333). Credit is provided by Glow Financial Services Limited, 71 Queen Victoria Street, London EC4V 4BE. Registered in England No. 09127663. Glow Financial Services Limited is authorised and regulated by the Financial Conduct Authority (Reference No. 751308). Glow Financial Services acting as lender, under brand license as Samsung Finance (powered by Glow) through Samsung Electronics (UK) Limited. The Financial Services Register can be accessed through www.fca.org.uk</p>
+			`;
+
+			let Terms = $("<div id='TradeInConditions' class='delivery-terms'></div>");
+			document.body.contains(Terms[0]) || $(".TermsConditionsSlotContent").append(Terms), termsContent && Terms.html(termsContent);
+
+		}
 
 
 	};
