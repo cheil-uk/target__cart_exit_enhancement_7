@@ -42,9 +42,9 @@ cheillondon.targetBoilerplate = (function () {
 					main.appendNewStyle();
 					main.addRemoveElements();
 
-					
+
 					/*main.tweakElements();
-					
+
 					main.insureButtons();
 					main.freeInsurance();*/
 
@@ -85,14 +85,14 @@ cheillondon.targetBoilerplate = (function () {
 
 		},
 
-		
+
 		// ==========================================================================
 		// When page is already loaded we need to add the new elements
 		// ==========================================================================
 		addRemoveElements: function () {
 
 			console.log('XXX - addRemoveElements');
-			
+
 
 			const eligibleSkus = [
 
@@ -110,7 +110,6 @@ cheillondon.targetBoilerplate = (function () {
 				"UE65TU7020KXXU",
 				"QE43LS03AAUXXU",
 				"QE65QN95AATXXU",
-				"UE32T5300CKXXU",
 				"QE32LS03TCUXXU",
 				"UE50TU7020KXXU",
 				"UE43AU8000KXXU",
@@ -149,18 +148,18 @@ cheillondon.targetBoilerplate = (function () {
 
 			/** Showing different finance details for the product price in between 150 to 250 and  250 and above **/
 			switch (true) {
-                case productPrice >= 150 && productPrice <= 250:
-                	financeContent = `
-                		<div class="title">Discover a new way to pay with Samsung Finance</div>
-						<div class="txt">Spread the cost of your order over 12 months at 0% APR representative.*</div>
-                	`;
-                	break;
-                default:
-                	financeContent = `
-                		<div class="title">Flexible ways to pay with Samsung Finance</div>
-						<div class="txt">Spread the cost of your order over 12 to 36 months at 0% APR representative.*</div>
-                	`;
-            }
+							case productPrice >= 150 && productPrice <= 250:
+								financeContent = `
+									<div class="title">Discover a new way to pay with Samsung Finance</div>
+									<div class="txt">Spread the cost of your order over 12 months at 0% APR representative.*</div>
+								`;
+								break;
+							default:
+								financeContent = `
+									<div class="title">Flexible ways to pay with Samsung Finance</div>
+									<div class="txt">Spread the cost of your order over 12 to 36 months at 0% APR representative.*</div>
+								`;
+			}
 
 
 
@@ -170,27 +169,27 @@ cheillondon.targetBoilerplate = (function () {
 						<div class="title">Your order qualifies for:</div>
 						<div class="info-list">
 							<div class="txt">Next day delivery (<a href="#" class="delivey-popup-link" data-omni-type="microsite" data-omni="simple buying tool:your order qualifies for:more info" data-an-tr="order-qualifies-info" data-an-la="your order qualifies for:more info">More info</a>) </div>
-							<div class="price">FREE</div>     
+							<div class="price">FREE</div>
 						</div>
 						<div class="info-list">
 							<div class="txt">Scheduled day delivery</div>
-							<div class="price">FREE</div>     
+							<div class="price">FREE</div>
 						</div>
 						<div class="info-list">
 							<div class="txt">Same day delivery</div>
-							<div class="price">See checkout</div>     
+							<div class="price">See checkout</div>
 						</div>
 						<div class="info-list">
 							<div class="txt">Timed delivery</div>
-							<div class="price">See checkout</div>     
+							<div class="price">See checkout</div>
 						</div>
 						<div class="info-list">
 							<div class="txt">21-day returns (<a href="#" class="delivey-popup-link" data-omni-type="microsite" data-omni="simple buying tool:your order qualifies for:more info" data-an-tr="order-qualifies-info" data-an-la="your order qualifies for:more info">More info</a>)</div>
-							<div class="price">FREE</div>     
+							<div class="price">FREE</div>
 						</div>
 						<div class="info-list">
 							<div class="txt">Further delivery, installation, and recycling options are available when you check out.</div>
-						</div>  
+						</div>
 					</div>
 
 					<div class="finance-info">
@@ -209,8 +208,8 @@ cheillondon.targetBoilerplate = (function () {
 
 				if (eligibleSkus.filter((sku) => (element.querySelector(".cart-item__sku").innerText.includes(sku))).length) {
 					//If sku matches the eligible Sku list
-            		
-					noOfEligibleSkus = noOfEligibleSkus+1; 
+
+					noOfEligibleSkus = noOfEligibleSkus+1;
             		return false; // to break the loop
 
             	}
@@ -220,7 +219,7 @@ cheillondon.targetBoilerplate = (function () {
 
 
 			if (noOfEligibleSkus > 0) {
-					
+
 				/** Ensure that no Delivery details div already added to the cart **/
 				if ($('#DeliveryDetails').length == 0) {
 					let deliveryDetails = $("<p id='DeliveryDetails'></p>");
@@ -229,7 +228,7 @@ cheillondon.targetBoilerplate = (function () {
 					main.setEvents('itemRemovedFromCart'); // If a Item removed from cart
 					main.processTermsFooter();
 				}
-				
+
 			}
 
 			/*else {
@@ -239,7 +238,7 @@ cheillondon.targetBoilerplate = (function () {
 
 			}*/
 
-			
+
 
 		},
 
