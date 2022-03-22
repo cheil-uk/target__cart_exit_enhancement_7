@@ -164,6 +164,8 @@ cheillondon.targetBoilerplate = (function () {
 				"RF23R62E3SR/EU"
 			];
 
+
+
 			/** Take the product price Total amount from Cart **/
 			let productPrice = parseInt($('.summary-total__amount').text().trim().replace(/\u00A3/g, ''));
 
@@ -192,7 +194,7 @@ cheillondon.targetBoilerplate = (function () {
 					<div class="delivery-info">
 						<div class="title">Your order qualifies for:</div>
 						<div class="info-list">
-							<div class="txt">Next day delivery (<a href="#" class="delivey-popup-link" data-omni-type="microsite" data-omni="simple buying tool:your order qualifies for:more info" data-an-tr="order-qualifies-info" data-an-la="your order qualifies for:more info">More info</a>) </div>
+							<div class="txt">Next day delivery (<a href="#" class="delivey-popup-link">More info</a>) </div>
 							<div class="price">FREE</div>
 						</div>
 						<div class="info-list">
@@ -208,7 +210,7 @@ cheillondon.targetBoilerplate = (function () {
 							<div class="price">See checkout</div>
 						</div>
 						<div class="info-list">
-							<div class="txt">21-day returns (<a href="#" class="delivey-popup-link" data-omni-type="microsite" data-omni="simple buying tool:your order qualifies for:more info" data-an-tr="order-qualifies-info" data-an-la="your order qualifies for:more info">More info</a>)</div>
+							<div class="txt">21-day returns (<a href="#" class="delivey-popup-link">More info</a>)</div>
 							<div class="price">FREE</div>
 						</div>
 						<div class="info-list">
@@ -263,7 +265,8 @@ cheillondon.targetBoilerplate = (function () {
 			}*/
 
 
-
+			//this will add in tagging
+			main.addTagging();
 		},
 
 
@@ -331,6 +334,28 @@ cheillondon.targetBoilerplate = (function () {
 			let Terms = $("<div id='TradeInConditions' class='delivery-terms'></div>");
 			document.body.contains(Terms[0]) || $(".TermsConditionsSlotContent").append(Terms), termsContent && Terms.html(termsContent);
 
+		},
+
+		addTagging : function () {
+
+		function tagging(el, attrs) {
+    for(let key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
+  }
+
+		const moreInfoElements = document.querySelectorAll('.delivey-popup-link');
+
+		moreInfoElements.forEach((moreInfoBtns) => {
+
+				tagging(moreInfoBtns,
+			{ "data-omni-type"  : "microsite",
+					"data-omni"       : `uk:simple buying tool:your order qualifies for:more info`,
+					"ga-ac"           : "order-qualifies-info",
+					"ga-ca"           : "more info",
+					"ga-la"           : `your order qualifies for:more info`
+			})
+		})
 		}
 
 
