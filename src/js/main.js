@@ -202,14 +202,6 @@ cheillondon.targetBoilerplate = (function () {
 							<div class="price">FREE</div>
 						</div>
 						<div class="info-list">
-							<div class="txt">Same day delivery</div>
-							<div class="price">See checkout</div>
-						</div>
-						<div class="info-list">
-							<div class="txt">Timed delivery</div>
-							<div class="price">See checkout</div>
-						</div>
-						<div class="info-list">
 							<div class="txt">21-day returns (<a href="#" class="delivey-popup-link">More info</a>)</div>
 							<div class="price">FREE</div>
 						</div>
