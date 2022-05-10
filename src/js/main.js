@@ -52,7 +52,7 @@ cheillondon.targetBoilerplate = (function () {
 					console.log('no jquery')
 					_self.doEverythingTimeout();
 				}
-			}, 900)
+			}, 2000)
 		},
 
 
@@ -161,9 +161,37 @@ cheillondon.targetBoilerplate = (function () {
 				"RB38T633ESA/EU",
 				"RB34T602EBN/EU",
 				"RB34T632EBN/EU",
-				"RF23R62E3SR/EU"
-			];
+				"RF23R62E3SR/EU",
 
+				"SM-G990BLVDEUA",
+				"SM-G990BLGDEUA",
+				"SM-G990BLVGEUA",
+				"SM-G990BZWDEUA",
+				"SM-G990BZAGEUA",
+				"SM-G990BLGGEUA",
+				"SM-G990BZWGEUA",
+
+				"SM-A528BLVCEUA",
+				"SM-A528BZKCEUA",
+				"SM-A528BZWCEUA",
+				"SM-A528BLGCEUA",
+
+				"SM-A536BZKNEUB",
+				"SM-A536BLBNEUB",
+				"SM-A536BZONEUB",
+
+				"SM-A336BLBGEUB",
+				"SM-A336BZKGEUB",
+				"SM-A336BZWGEUB",
+				"SM-A336BZOGEUB",
+
+				"SM-R870NZKAEUA",
+				"SM-R870NZGAEUA",
+				"SM-R870NZSAEUA",
+
+				"SM-R890NZKAEUA",
+				"SM-R890NZSAEUA",
+			];
 
 
 			/** Take the product price Total amount from Cart **/
